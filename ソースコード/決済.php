@@ -11,8 +11,7 @@
     <button onclick="location.href='top.php'">キャンセル</button><br>
     <?php
     echo '<p>商品数：</p>';
-    echo '<p>割引額：</p>';
-    echo '<p>配送料：</p>';
+    echo '<p>配送料：500</p>';
     echo '<p>合計額：</p>';
 
     ?>
