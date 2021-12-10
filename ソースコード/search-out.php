@@ -34,16 +34,12 @@ $pdo = new PDO('mysql:host=mysql153.phy.lolipop.lan;
         </table>
     </div>
 
-    <?php
-    //検索フォームから入力したワードをDBに保存
-    $word = $_POST['keyword'];
-
-    $sql = $pdo->prepare('insert into earch_words(words) value ?');
-    $sql -> bindValue(1,$_POST['keyword'],PDO::PARAM_STR);
-    $sql -> execute();
-
-
-    ?>
+    <h2>検索</h2>
+    <hr>
+    <form action="" method="post">
+        <input type="text" name="keyword">
+        <button type="submit" value="検索" id="">検索</button><br>
+    </form>
 
     <?php
 
