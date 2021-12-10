@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -8,29 +9,68 @@
 </head>
 
 <body>
+
+
 <div style="text-align: center">
-<h1>Ishin</h1>
-<button onclick="location.href='top.php'">TOP</button>
+    <h1>Ishin</h1>   <!-- 店名 -->
 
-<button onclick="location.href='新着.php'">新着商品</button>
+    <div style="display: inline-table">
+        <table>
+            <tr>
+                <td><button onclick="location.href='検索.php'">検索</button></td>
+                <td><button onclick="location.href='新着.php'">新着商品</button></td>
+                <td><button onclick="location.href='人気.php'">人気商品</button></td>
+                <td><button onclick="location.href='セール.php'">セール</button></td>
+                <td><button onclick="location.href='カート.php'">カート</button></td>
+                <td><button onclick="location.href='会員情報.php'">会員情報</button></td>
+            </tr>
+        </table>
+    </div>
 
-<button onclick="location.href='人気.php'">人気商品</button>
 
-<button onclick="location.href='セール.php'">セール</button>
-
-<button onclick="location.href='カート.php'">カート</button>
-
-<button onclick="location.href='会員情報.php'">会員情報</button>
-
-<p>検索画面</p>
-    <form action="検索.php" method="post">
-        <input type="text" name="kensaku">
-        <button type="submit" value="検索">検索</button><br>
+    <h2>検索</h2>
+    <hr>
+    <form action="search-output.php" method="post">
+        <input type="text" name="keyword">
+        <button type="submit" value="検索" id="">検索</button><br>
     </form>
-<p>検索履歴一覧↓↓</p>
+
+
+    <br>
+        <h2>閲覧履歴</h2>
+    <hr>
+        <th><h3>商品名：検索時間</h3></th>
+
     <?php
+    //DBから履歴として表示
+    echo '<table>';
+
+    //DB接続
+    $pdo = new PDO('mysql:host=mysql153.phy.lolipop.lan;
+                    dbname=LAA1290595-school;charset=utf8',
+        'LAA1290595',
+        'Riemori4268');
+
+    foreach ( $pdo -> query('select * from search_words') as $row) {
+
+        echo '<p>';
+        echo $row['words'],'：';
+        echo $row['time'];
+
+        echo '<button type="submit" name="delete">','削除','</button>';
+        echo '</p>';
+        
+    }
+
+    $pdo = null;
+    echo '</table>';
+
+
 
     ?>
+
+
 </div>
+
 </body>
 </html>
