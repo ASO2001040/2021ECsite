@@ -18,32 +18,60 @@
             <td><button onclick="location.href='会員情報.php'">会員情報</button></td>
         </tr>
     </table>
-    </div>
     <h4>今季新アイテム入荷しました！</h4>
     <h3>セール開催中</h3>
     <button onclick="location.href='セール.php'">詳しく見る▶︎</button>
     <h4>おすすめアイテム</h4>
+
     <table>
         <tr>
-            <script>
-                function click1() {
-                    document.img.src = "./img/women.png";
-                    document.getElementById("text").innerHTML = "ワンピース";
-                    document.getElementById("text2").innerHTML = "¥1,580";
-                }
-                function click2(){
-                    document.img.src = "./img/men.png";
-                    document.getElementById("text").innerHTML = "ジャケット";
-                    document.getElementById("text2").innerHTML = "¥3,300";
-                }
-            </script>
-            <tb><input type="button" id="women" onclick="click1()" value="WOMEN"></tb>
-            <tb><input type="button" id="men" onclick="click2()" value="MEN"></tb><br>
-            <a href="商品詳細.php"><img name="img" src="./img/women.png"></a>
+            <form action="top.php" method="post">
+            <tb><input type="submit" name="women" value="WOMEN"></tb>
+            <tb><input type="submit" name="men" value="MEN"></tb><br>
+            </form>
         </tr>
-        <tr><p id="text">ワンピース</p></tr>
-        <tr><p id="text2">¥1,580</p></tr>
     </table>
+    <table style="display: inline-table">
+    <?php
+    $pdo = new PDO('mysql:host=mysql153.phy.lolipop.lan;
+                dbname=LAA1290595-school;charset=utf8',
+        'LAA1290595',
+        'Riemori4268');
+
+    $sql = $pdo->prepare('select * from commodity where ID in(1,4)');
+    $sql->execute([]);
+
+    echo '<tr>';
+    if(!isset($_POST['men'])) {
+        foreach ($sql as $row) {
+            $ID=$row['ID'];
+            echo '<td>';
+            echo '<a href="商品詳細.php?id=',$ID,'">';
+            echo '<img src="./img/img', $ID, '.png">';
+            echo '</a>';
+            echo '<p>', $row['commodity_name'], '</p>';
+            echo '<p>¥', number_format($row['money']), '</p>';
+            echo '<p><input type="submit" name="favorite" value="お気に入りに追加"></p>';
+            echo '</td>';
+        }
+    } else{
+        $sql = $pdo->prepare('select * from commodity where ID in(2,3)');
+        $sql->execute([]);
+        foreach ($sql as $row) {
+            echo '<td>';
+            echo '<a href="商品詳細.php?id=',$row['ID'],'">';
+            echo '<img src="./img/img',$row['ID'],'.png">';
+            echo '</a>';
+            echo '<p>',$row['commodity_name'],'</p>';
+            echo '<p>¥', number_format($row['money']), '</p>';
+            echo '</td>';
+        }
+    }
+    echo '</tr>';
+    ?>
+    </table>
+    </div>
 </div>
 </body>
 </html>
+
