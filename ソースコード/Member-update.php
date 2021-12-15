@@ -16,7 +16,7 @@
 <form action="Member-update-input.php" method="post">
     更新する情報を選択してください
     <select name="date">
-        <option value="0" name="name">変更する情報を選択してください</option>
+        <option value="">変更する情報を選択してください</option>
         <option value="1" name="name">お名前</option>
         <option value="2" name="address">住所</option>
         <option value="3" name="tel">電話番号</option>
