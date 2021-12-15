@@ -49,4 +49,4 @@
 |顧客コード|user_id|int(10)|○|○||
 |検索id|id|int(10)||○||
 |検索ワード|words|varchar(30)||○||
-|時間|timestamp|||○||
+|時間|timestamp|DATE||○||
