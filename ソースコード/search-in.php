@@ -55,7 +55,7 @@
 
         echo '<p>';
         echo $row['words'],'：';
-        echo $row['time'];
+        echo $row['timestamp'];
 
         echo '<button type="submit" name="delete">','削除','</button>';
         echo '</p>';
